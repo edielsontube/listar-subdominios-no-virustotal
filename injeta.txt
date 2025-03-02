@@ -1,0 +1,79 @@
+// Função para aguardar até que o shadow DOM esteja carregado
+function waitForElement(selector, root = document, timeout = 10000) {
+    return new Promise((resolve, reject) => {
+        const interval = 100;
+        let elapsedTime = 0;
+
+        const check = () => {
+            const element = root.querySelector(selector);
+            if (element) {
+                resolve(element);
+            } else if (elapsedTime >= timeout) {
+                reject(new Error("Elemento não encontrado no tempo limite"));
+            } else {
+                elapsedTime += interval;
+                setTimeout(check, interval);
+            }
+        };
+
+        check();
+    });
+}
+
+// Função principal para clicar no botão "Carregar mais" repetidamente
+async function clicarCarregarMaisContinuamente() {
+    try {
+        // Primeiro shadowRoot
+        const domainView = document.querySelector("#view-container > domain-view");
+        if (!domainView) throw new Error("Elemento 'domain-view' não encontrado");
+
+        const shadow1 = domainView.shadowRoot;
+        if (!shadow1) throw new Error("ShadowRoot de 'domain-view' não encontrado");
+
+        // Segundo shadowRoot
+        const relations = shadow1.querySelector("#relations");
+        if (!relations) throw new Error("Elemento '#relations' não encontrado");
+
+        const shadow2 = relations.shadowRoot;
+        if (!shadow2) throw new Error("ShadowRoot de '#relations' não encontrado");
+
+        // Loop para clicar no botão continuamente
+        while (true) {
+            try {
+                // Botão "Carregar mais"
+                const buttonContainer = shadow2.querySelector("div > vt-ui-expandable.mb-3.subdomains > span > div > vt-ui-button");
+                if (!buttonContainer) {
+                    console.log("Botão 'vt-ui-button' não encontrado. Encerrando o script.");
+                    break;
+                }
+
+                const shadow3 = buttonContainer.shadowRoot;
+                if (!shadow3) {
+                    console.log("ShadowRoot de 'vt-ui-button' não encontrado. Encerrando o script.");
+                    break;
+                }
+
+                // Seleciona o botão dentro do shadowRoot final
+                const carregarMaisBotao = await waitForElement("div", shadow3);
+                if (carregarMaisBotao) {
+                    carregarMaisBotao.click();
+                    console.log("Botão clicado com sucesso!");
+                } else {
+                    console.log("Botão 'Carregar mais' não encontrado. Encerrando o script.");
+                    break;
+                }
+
+                // Aguarda um segundo antes de tentar clicar novamente
+                await new Promise(resolve => setTimeout(resolve, 1000));
+            } catch (innerError) {
+                console.error("Erro ao tentar clicar no botão:", innerError.message);
+                break;
+            }
+        }
+    } catch (error) {
+        console.error("Erro principal:", error.message);
+    }
+}
+
+// Executa a função
+clicarCarregarMaisContinuamente();
