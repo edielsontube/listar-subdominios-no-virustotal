@@ -23,7 +23,12 @@ Este script permite listar todos os subdomínios de um site no VirusTotal, sem p
     
     Copie todo o conteúdo do arquivo injeta.txt e cole no console do navegador.
 
+    talvez o navegador na aba console possa uma mensagem para voce da uma permissao de colar script  entao de essa permisao
+
+    depois que colar o script no console e so da ENTER
+
 🔹 O script fará o trabalho automaticamente para você!
 
-![image](https://github.com/user-attachments/assets/6f5db547-8773-4a5d-9053-3089233fa4f1)
+![image](https://github.com/user-attachments/assets/0af7dcc7-86e3-4cd9-b4a4-9fbb52fafa7f)
+
 
