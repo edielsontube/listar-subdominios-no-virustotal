@@ -12,10 +12,15 @@ Este script permite listar todos os subdomínios de um site no VirusTotal, sem p
     Abra o site do VirusTotal e pesquise pelo domínio desejado.
     Exemplo:
     👉 https://www.virustotal.com/gui/domain/firebaseio.com/relations
-    Substitua firebaseio.com pelo domínio que deseja pesquisar.
+    
+    Substitua firebaseio.com na url acima pelo domínio que deseja pesquisar.
+    
     Copie o link completo e cole no navegador.
+    
     Sempre mantenha a aba "Relations" aberta no VirusTotal.
+    
     Abra o Inspecionar Elemento no navegador.
+    
     Copie todo o conteúdo do arquivo injeta.txt e cole no console do navegador.
 
 🔹 O script fará o trabalho automaticamente para você!
